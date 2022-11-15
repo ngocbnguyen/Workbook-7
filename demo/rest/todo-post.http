@@ -1,0 +1,8 @@
+POST http://localhost:8888/todos/
+Content-Type: application/json
+
+{
+  "userId": 5,
+  "title": "Sort Laundry",
+  "completed": false
+}
