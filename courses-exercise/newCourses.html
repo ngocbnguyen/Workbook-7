@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Courses</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Department</th>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            <th>Instructor</th>
+            <th>Start Day</th>
+            <th>Number of Days</th>
+        </tr>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+
+<script>
+    const $q = (selector) => document.querySelector(selector);
+    const tbody = $q("tbody");
+
+    function loadData() {
+        return fetch("http://localhost:8888/courses").then(response => response.json());
+    }
+
+    function editLink(courses) {
+        const a = document.createElement("a");
+        a.href = "./edit-course.html";
+        a.innerText = "Edit";
+        return a;
+    }
+
+    function fillTable(courses) {
+        for (const course of courses) {
+            const row = tbody.insertRow(-1);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3)
+            const cell5 = row.insertCell(4)
+            const cell6 = row.insertCell(5)
+            cell1.innerText = course.dept;
+            cell2.innerText = course.courseNum;
+            cell3.innerText = course.courseName;
+            cell4.innerText = course.instructor;
+            cell5.innerText = course.startDate;
+            cell6.innerText = course.numDays;
+            const a = editLink(course)
+        }
+    }
+    window.onload = () => {
+        loadData().then(data => fillTable(data));
+    }
+</script>
+</html>
